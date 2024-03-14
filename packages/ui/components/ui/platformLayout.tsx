@@ -22,6 +22,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@repo/ui/components/ui/resizable";
+import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { ModeToggle } from "./modeToggle";
 
@@ -39,7 +40,8 @@ function Layout({
   children,
 }: LayoutProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
-
+  const currentPage = usePathname();
+  console.log(currentPage);
   return (
     <div className="h-screen  w-full items-stretch">
       <TooltipProvider delayDuration={0}>
@@ -81,41 +83,45 @@ function Layout({
                   {
                     title: "Home",
                     icon: Home,
-                    variant: "default",
+                    variant: currentPage == "/" ? "default" : "ghost",
                     path: "/",
                   },
                   {
                     title: "Users",
                     icon: Users,
-                    variant: "ghost",
+                    variant: currentPage == "/users" ? "default" : "ghost",
                     path: "/users",
                   },
                   {
                     title: "Trends and Marketing",
                     label: "",
                     icon: Presentation,
-                    variant: "ghost",
+                    variant:
+                      currentPage == "/trends-&-marketing"
+                        ? "default"
+                        : "ghost",
                     path: "/trends-&-marketing",
                   },
                   {
                     title: "Feedback",
                     label: "23",
                     icon: MessageSquareQuote,
-                    variant: "ghost",
+                    variant: currentPage == "/feedback" ? "default" : "ghost",
                     path: "/feedback",
                   },
                   {
                     title: "Add Faqs",
                     label: "",
                     icon: SquarePlus,
-                    variant: "ghost",
+                    variant:
+                      currentPage == "/create-faqs" ? "default" : "ghost",
                     path: "/create-faqs",
                   },
                   {
                     title: "Analytics and reports",
                     label: "",
                     icon: FilePieChart,
-                    variant: "ghost",
+                    variant: currentPage == "/report" ? "default" : "ghost",
                     path: "/report",
                   },
 
@@ -123,7 +129,7 @@ function Layout({
                     title: "Apps",
                     label: "",
                     icon: LayoutDashboard,
-                    variant: "ghost",
+                    variant: currentPage == "/app" ? "default" : "ghost",
                     path: "/app",
                   },
                 ]}
