@@ -82,35 +82,41 @@ function Layout({
                     title: "Home",
                     icon: Home,
                     variant: "default",
+                    path: "/",
                   },
                   {
                     title: "Users",
                     icon: Users,
                     variant: "ghost",
+                    path: "/users",
                   },
                   {
                     title: "Trends and Marketing",
                     label: "",
                     icon: Presentation,
                     variant: "ghost",
+                    path: "/trends-&-marketing",
                   },
                   {
                     title: "Feedback",
                     label: "23",
                     icon: MessageSquareQuote,
                     variant: "ghost",
+                    path: "/feedback",
                   },
                   {
                     title: "Add Faqs",
                     label: "",
                     icon: SquarePlus,
                     variant: "ghost",
+                    path: "/create-faqs",
                   },
                   {
                     title: "Analytics and reports",
                     label: "",
                     icon: FilePieChart,
                     variant: "ghost",
+                    path: "/report",
                   },
 
                   {
@@ -118,6 +124,7 @@ function Layout({
                     label: "",
                     icon: LayoutDashboard,
                     variant: "ghost",
+                    path: "/app",
                   },
                 ]}
               />
@@ -125,7 +132,7 @@ function Layout({
           </ResizablePanel>
           <ResizableHandle withHandle />
           <ResizablePanel defaultSize={defaultLayout[1]} minSize={40}>
-            <div className="flex items-center px-4 py-2 justify-end">
+            <div className="flex items-center px-4  h-20 justify-end">
               {/* <h1 className="text-xl font-bold">home</h1> */}
 
               <div className="flex items-center gap-x-5 cursor-pointer">
@@ -143,8 +150,6 @@ function Layout({
                 <ModeToggle />
               </div>
             </div>
-
-            <Separator />
 
             {children}
           </ResizablePanel>
