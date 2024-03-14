@@ -6,7 +6,21 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@repo/ui/components/ui/resizable";
+import { Switch } from "@repo/ui/components/ui/switch"
+import { Button } from "@repo/ui/components/ui/button"
+import { Input } from "@repo/ui/components/ui/input"
+import { Label } from "@repo/ui/components/ui/label"
 import { Separator } from "@repo/ui/components/ui/separator";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@repo/ui/components/ui/select"
+
 import { BookOpenText } from "lucide-react";
 interface LayoutProps {
   children: React.ReactNode;
@@ -39,6 +53,53 @@ function CreateFaq({}: LayoutProps) {
                 <h1 className="font-bold">Faq Management</h1>
               </div>
               <Separator />
+              
+              <div className="mt-2 mb-4">
+                <div className="grid w-full mt-4 max-w-sm items-center gap-1.5">
+                  <Label className="mb-2" htmlFor="picture">Upload a Source document</Label>
+                  <Input id="picture" type="file" />
+                </div>
+
+                <div className="grid w-full mt-4 max-w-sm items-center gap-1.5">
+                  <Label className="mb-2" htmlFor="picture">From a URL</Label>
+                  <div className="flex w-full max-w-sm items-center space-x-2">
+                    <Input type="url" placeholder="Url" />
+                    <Button type="submit">Go</Button>
+                  </div>
+                </div>
+              </div>
+
+              <Separator />
+
+              <div className="grid w-full mt-4 mb-4 max-w-sm items-center gap-1.5">
+                <Label className="mb-2" htmlFor="airplane-mode">Optimize content for SEO</Label>
+                <Switch id="airplane-mode" />
+              </div>
+
+              <Separator />
+
+              <div className="grid w-full mt-4 mb-4 max-w-sm items-center gap-1.5">
+              <Label className="mb-2" htmlFor="airplane-mode">Supported Langauges</Label>
+              <Select>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select a language" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Languages</SelectLabel>
+                    <SelectItem value="english">English</SelectItem>
+                    <SelectItem value="mandarin">Chinese</SelectItem>
+                    <SelectItem value="hindi">Hindi</SelectItem>
+                    <SelectItem value="spanish">Spanish</SelectItem>
+                    <SelectItem value="french">French</SelectItem>
+                    <SelectItem value="arabic">Arabic</SelectItem>
+                    <SelectItem value="bengali">Bengali</SelectItem>
+                    <SelectItem value="russian">Russian</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              </div>
+
             </div>
           </ResizablePanel>
           <ResizableHandle withHandle />
