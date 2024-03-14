@@ -6,7 +6,7 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "add:component":"npm run --workspace @repo/ui ui:add"
+    "add:component": "npm run --workspace @repo/ui ui:add"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
@@ -21,5 +21,8 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "react-router-dom": "^6.22.3"
+  }
 }
