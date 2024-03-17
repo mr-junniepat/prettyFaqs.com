@@ -1,0 +1,21 @@
+{
+    "name": "@repo/emails",
+    "sideEffects": false,
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "dx": "docker compose up -d || docker-compose up -d"
+    },
+    "dependencies": {
+        "@repo/dayjs": "*",
+        "@repo/libs": "*",
+        "@repo/prisma": "*",
+        "handlebars": "^4.7.8",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "rrule": "^2.7.1"
+    },
+    "devDependencies": {
+        "@repo/typescript-config": "*"
+    }
+}
