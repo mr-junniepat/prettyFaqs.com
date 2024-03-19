@@ -1,0 +1,11 @@
+{
+  
+"extends": "@repo/typescript-config/react-library.json",
+"compilerOptions": {
+  "baseUrl": ".",
+
+},
+"resolveJsonModule": true,
+"esModuleInterop": true,
+"exclude": ["node_modules"]
+}
