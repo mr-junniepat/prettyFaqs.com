@@ -24,7 +24,7 @@ export default class VerifyEmailHandler extends BaseHandler  {
     return {
       to: `${this.verifyAccountInput.user.name} <${this.verifyAccountInput.user.email}>`,
       from: `<${this.getMailerOptions().from}>`,
-      subject: "email verification",
+      subject: "Email verification",
       html: compileTemplate(OTPEmailVerificationTemp, {otp: this.verifyAccountInput.verificationEmailCode}),
       text: "hello world from col",
     };
