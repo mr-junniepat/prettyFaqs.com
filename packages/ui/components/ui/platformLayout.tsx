@@ -31,6 +31,7 @@ interface LayoutProps {
   defaultLayout?: number[] | undefined;
   defaultCollapsed?: boolean;
   navCollapsedSize?: number;
+  user?: any;
 }
 
 function Layout({
@@ -38,10 +39,11 @@ function Layout({
   defaultCollapsed = true,
   navCollapsedSize,
   children,
+  user,
 }: LayoutProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
   const currentPage = usePathname();
-  console.log(currentPage);
+  console.log(user);
   return (
     <div className="h-screen  w-full items-stretch">
       <TooltipProvider delayDuration={0}>

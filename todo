@@ -1,2 +1,11 @@
-models [org, users, faqs, questions]
+Sign up
+    1. Build the verify email logic
+        a. Add zod
+        b. create a model to handle OTP
+        c. compare OTP logic
+    2. create the invite email logic 
+        a. Create user with name and email
+        b. add them to the org
+        c. send an email with an expiring token
+    3. Sign-up logic for invited user
 
