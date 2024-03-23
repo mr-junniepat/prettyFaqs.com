@@ -1,6 +1,6 @@
-import { OTPEmailVerificationTemp } from "../templates/OTPEmailVerificationTemp";
-import { compileTemplate } from "../templates/compileTemplate";
-import BaseHandler  from "./_baseHandler";
+import { OTPEmailVerificationTemp } from "./template";
+import { compileTemplate } from "../../utils/compileTemplate";
+import BaseHandler  from "../../utils/_baseHandler";
 
 
 export type EmailVerifyCode = {
@@ -10,6 +10,7 @@ export type EmailVerifyCode = {
     email: string;
   };
   verificationEmailCode: string;
+  
 };
 
 export default class VerifyEmailHandler extends BaseHandler  {
@@ -26,7 +27,7 @@ export default class VerifyEmailHandler extends BaseHandler  {
       from: `<${this.getMailerOptions().from}>`,
       subject: "Email verification",
       html: compileTemplate(OTPEmailVerificationTemp, {otp: this.verifyAccountInput.verificationEmailCode}),
-      text: "hello world from col",
+      text: "hello verify your email",
     };
   }
 

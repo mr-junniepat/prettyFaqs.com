@@ -13,27 +13,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserPermissionRole {
+  USER
+  ADMIN
+}
+
 model Org {
-  id               String          @id @default(uuid())
-  name             String
-  createdAt        DateTime        @default(now())
-  updatedAt        DateTime        @updatedAt
-  orgUsers         User[]
-  orgKnowledgeBase KnowledgeBase[]
+  id                  String          @id @default(uuid())
+  name                String
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+  orgUsers            User[]
+  orgKnowledgeBase    KnowledgeBase[]
+  enableTwoFactorAuth Boolean?        @default(false)
 }
 
 model User {
-  id            String   @id @unique @default(uuid())
-  email         String   @unique
-  username      String?
-  password      String?
-  name          String?
-  avatar        String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  Org           Org?     @relation(fields: [orgId], references: [id])
-  orgId         String?
-  emailVerified Boolean? @default(false)
+  id                  String             @id @unique @default(uuid())
+  email               String             @unique
+  username            String?
+  password            String?
+  name                String?
+  role                UserPermissionRole @default(USER)
+  avatar              String?
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+  Org                 Org?               @relation(fields: [orgId], references: [id])
+  orgId               String?
+  emailVerified       Boolean?           @default(false)
+  enableTwoFactorAuth Boolean?           @default(false)
 }
 
 model KnowledgeBase {
@@ -42,4 +50,20 @@ model KnowledgeBase {
   Org      Org?    @relation(fields: [orgId], references: [id])
   orgId    String?
   metadata Json?
+}
+
+model Otp {
+  id    String @id @default(uuid())
+  otp   String @unique
+  email String @unique
+}
+
+model VerificationToken {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  token         String   @unique
+  expires       DateTime
+  expiresInDays Int?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

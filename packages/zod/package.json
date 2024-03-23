@@ -1,0 +1,8 @@
+{
+    "name": "@repo/zod",
+    "version": "0.0.0",
+    "private": true,
+    "dependencies": {
+        "zod": "^3.22.4"
+    }
+}

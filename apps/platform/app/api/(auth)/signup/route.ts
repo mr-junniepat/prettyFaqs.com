@@ -1,44 +1,41 @@
 import { NextResponse} from 'next/server'
-
-import dayjs from "@repo/dayjs";
 import { hashPassword } from "@repo/libs";
-import { slugify } from "@repo/libs";
-import { generateOTPAndSendEmail  } from "@repo/emails/generateOTPAndSendEmail";
-import {Prisma, PrismaClient} from "@repo/prisma/client";
+import { generateTokenAndSendEmail  } from "@repo/emails/templates/tokenEmailVerificationTemp/generateTokenAndSendEmail";
+import {prisma} from "@repo/prisma/client";
 
 
 export async function POST(request: Request) {
-  const prisma = new PrismaClient()
   const res = await request.json()
-  
-  
-  
-  const { email, password, name } = res
-
-  const username = `@${slugify(name)}`;
+  const { email, password } = res
   const userEmail =  email.toLowerCase();
-
   const hashedPassword = await hashPassword(password);
-    await prisma.user.upsert({
-      where: { email: userEmail },
-      update: {
-        username,
-        name,
-        password: hashedPassword,
-      },
-      create: {
-        username,
-        email: userEmail,
-        password: hashedPassword,
-       
-      },
-    });
-    await generateOTPAndSendEmail({
-      email: userEmail,
-      name,
-  
-    });
-  
 
-    return  NextResponse.json({ message: "Created user" });
+  const isUserExisting = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  })
+
+
+if(isUserExisting){
+    return  NextResponse.json({ message: "Email is already taken" }, {status:400});
+}
+
+   await prisma.user.create({
+          data: {
+              email: userEmail,
+              password: hashedPassword,
+             
+            }
+      })
+     
+      await generateTokenAndSendEmail({
+        email: userEmail,
+      }).catch((error) => console.error(error))
+    
+  
+      return  NextResponse.json({ message: "Created user" });
+
+   
+ 
 }

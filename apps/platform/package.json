@@ -3,19 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 5008",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@repo/ui": "*",
-    "@repo/prisma":"*",
-    "@repo/libs": "*",
     "@repo/dayjs": "*",
-    "@repo/emails":"*",
+    "@repo/emails": "*",
+    "@repo/libs": "*",
+    "@repo/prisma": "*",
+    "@repo/ui": "*",
+    "@repo/zod": "*",
     "lucide-react": "^0.356.0",
     "next": "14.1.3",
+    "next-auth": "^5.0.0-beta.15",
     "react": "^18",
     "react-dom": "^18"
   },

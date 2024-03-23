@@ -18,7 +18,7 @@ export default class BaseHandler {
 
     const payload = this.getNodeMailerPayload();
     const parseSubject = z.string().safeParse(payload?.subject);
-    console.log({parseSubject, payload})
+    console.log({message:"I was called"})
     const payloadWithUnEscapedSubject = {
       ...payload,
       ...(parseSubject.success && { subject: decodeHTML(parseSubject.data) }),

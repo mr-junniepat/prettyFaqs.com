@@ -31,6 +31,7 @@ interface LayoutProps {
   defaultLayout?: number[] | undefined;
   defaultCollapsed?: boolean;
   navCollapsedSize?: number;
+  user?: any;
 }
 
 function Layout({
@@ -38,10 +39,11 @@ function Layout({
   defaultCollapsed = true,
   navCollapsedSize,
   children,
+  user,
 }: LayoutProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
   const currentPage = usePathname();
-  console.log(currentPage);
+  console.log();
   return (
     <div className="h-screen  w-full items-stretch">
       <TooltipProvider delayDuration={0}>
@@ -145,12 +147,15 @@ function Layout({
                 <BellDot />
                 <div className="flex space-x-2 items-center">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage
+                    {/* <AvatarImage
                       src="https://github.com/shadcn.png"
                       alt="@shadcn"
-                    />
-                    <AvatarFallback>CN</AvatarFallback>
+                    /> */}
+                    <AvatarFallback className=" uppercase font-bold">
+                      {user?.email[0]}
+                    </AvatarFallback>
                   </Avatar>
+                  <span>{user?.email}</span>
                   <ChevronDown className="text-[#5250F9]" />
                 </div>
                 <ModeToggle />
