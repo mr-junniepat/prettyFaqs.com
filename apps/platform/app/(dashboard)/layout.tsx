@@ -5,6 +5,7 @@ import { Inter as FontSans } from "next/font/google";
 import type { Metadata } from "next";
 import { cn } from "@repo/ui/lib/utils";
 import { auth } from "@platform/auth";
+import { logout } from "../actions/signout";
 
 type RootLayoutProps = {
   children: React.ReactNode;
@@ -29,7 +30,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       enableSystem
       disableTransitionOnChange
     >
-      <Layout user={session}>{children}</Layout>
+      <Layout user={session} SignOut={logout}>
+        {children}
+      </Layout>
     </ThemeProvider>
   );
 }
