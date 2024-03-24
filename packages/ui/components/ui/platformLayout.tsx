@@ -13,8 +13,6 @@ import {
 } from "lucide-react";
 
 import { cn } from "@repo/ui/lib/utils";
-import { Separator } from "@repo/ui/components/ui/separator";
-
 import { Nav } from "@repo/ui/components/ui/nav";
 import { TooltipProvider } from "@repo/ui/components/ui/tooltip";
 import {
@@ -25,6 +23,7 @@ import {
 import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { ModeToggle } from "./modeToggle";
+import AccountMenu from "./AccountMenu";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -32,6 +31,7 @@ interface LayoutProps {
   defaultCollapsed?: boolean;
   navCollapsedSize?: number;
   user?: any;
+  SignOut?: any;
 }
 
 function Layout({
@@ -40,10 +40,11 @@ function Layout({
   navCollapsedSize,
   children,
   user,
+  SignOut,
 }: LayoutProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
   const currentPage = usePathname();
-  console.log();
+
   return (
     <div className="h-screen  w-full items-stretch">
       <TooltipProvider delayDuration={0}>
@@ -155,7 +156,9 @@ function Layout({
                       {user?.email[0]}
                     </AvatarFallback>
                   </Avatar>
-                  <span>{user?.email}</span>
+                  <AccountMenu SignOut={SignOut}>
+                    <span>{user?.email}</span>
+                  </AccountMenu>
                   <ChevronDown className="text-[#5250F9]" />
                 </div>
                 <ModeToggle />
