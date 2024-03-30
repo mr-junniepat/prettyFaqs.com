@@ -2,6 +2,7 @@
 import { revalidatePath } from "next/cache";
 import { hashPassword } from "@repo/libs";
 import {signupSchema} from "@repo/zod/schema/signup"
+import {createOrgSchema} from "@repo/zod/schema/createOrg"
 import {prisma} from "@repo/prisma/client";
 import { generateTokenAndSendEmail  } from "@repo/emails/templates/tokenEmailVerificationTemp/generateTokenAndSendEmail";
 import { redirect } from "next/navigation";
@@ -9,6 +10,7 @@ import { redirect } from "next/navigation";
 export async function createAccount(prevState: { message: string; success: boolean}, formData: FormData) {
   const email = formData.get("email")
   const password = formData.get("password")
+  const businessName = formData.get("businessName")?.toString()!
   const parse = signupSchema.safeParse({email, password})
 
 
@@ -37,6 +39,19 @@ export async function createAccount(prevState: { message: string; success: boole
      role: "ADMIN"
     }
 })
+
+const org = await prisma.org.create({data:{
+  name:businessName
+}})
+
+await prisma.user.update({
+  where: {
+    email: userEmail,
+  },
+  data: {
+      orgId: org.id,
+    },
+});
 
 await generateTokenAndSendEmail({
 email: userEmail,

@@ -1,6 +1,4 @@
 "use server"
-import { revalidatePath } from "next/cache";
-
 import {prisma} from "@repo/prisma/client";
 import {  generateOTPAndSendEmail  } from "@repo/emails/templates/OTPEmailVerificationTemp/generateOTPAndSendEmail";
 import {signupSchema} from "@repo/zod/schema/signup"
@@ -25,7 +23,8 @@ export async function login(prevState: {message: string, success: boolean, twoFA
       Org: {
        select: {
         id:true,
-        enableTwoFactorAuth:true
+        enableTwoFactorAuth:true,
+        onboardingCompleted: true
        }
       },
     },
@@ -75,9 +74,9 @@ export async function login(prevState: {message: string, success: boolean, twoFA
    
     return  { message:error?.message, success: false }
   }
+ 
 
 
-  
  
     return  redirect("/")
 

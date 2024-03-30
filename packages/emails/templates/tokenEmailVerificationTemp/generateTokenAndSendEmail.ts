@@ -10,7 +10,7 @@ interface VerifyEmailType {
 
 }
 
-const WEBAPP_URL = process.env.NEXTAUTH_URL
+const WEBAPP_URL = process.env.NEXTAUTH_WEBURL
 export const generateTokenAndSendEmail = async ({ email }: VerifyEmailType) => {
     const token = randomBytes(32).toString("hex");
  

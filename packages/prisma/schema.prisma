@@ -26,6 +26,7 @@ model Org {
   orgUsers            User[]
   orgKnowledgeBase    KnowledgeBase[]
   enableTwoFactorAuth Boolean?        @default(false)
+  onboardingCompleted Boolean?        @default(false)
 }
 
 model User {

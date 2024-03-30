@@ -25,6 +25,23 @@ export function UserAuthForm({
     <div className={cn("grid gap-6", className)} {...props}>
       <form action={createAccount}>
         <div className="grid gap-2 gap-y-5">
+          {isAuthType !== "LOGIN" && (
+            <div className="grid gap-1">
+              <Label className="sr-only" htmlFor="businessName">
+                Business Name
+              </Label>
+              <Input
+                id="businessName"
+                placeholder="Business Name"
+                name="businessName"
+                autoCapitalize="none"
+                autoCorrect="off"
+                disabled={pending}
+                required
+              />
+            </div>
+          )}
+
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="email">
               Email
